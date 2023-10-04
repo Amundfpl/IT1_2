@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polaroid bilde</title>
+</head>
+<script>
+    window.onload= oppstart
+    var randomsrc=['Jarrod Bowen.jpg','Jarrod Bowen_edited 2.jpg','benrahma.jfif','theboys.jfif', 'theband.jfif', 'king.jfif','london.jfif']
+    var randomnmb=["West ham", "The Goat", "Benrahma", "Love of my life","The boys","The Band","GOATED","HOMETOWN"]
+    
+    function oppstart(){
+        window.onscroll = function(){
+        var number2 = Math.floor(Math.random()*randomsrc.length);
+        var number1 = Math.floor(Math.random()*randomnmb.length)
+        
+            var New=document.createElement("img")
+            var div=document.createElement("div")
+            div.appendChild(New)
+            var Ny=document.createElement("p")
+            var Nu=document.createTextNode(randomnmb[number1])
+            Ny.appendChild(Nu)
+            div.appendChild(Ny)
+            Ny.className="txt"
+            New.src = randomsrc[number2]
+            div.className="instant-foto"
+            document.getElementById("body").appendChild(div)
+            
+        }
+    }
+</script>
+<body id="body">
+<div class="instant-foto">
+<img src="Jarrod Bowen_edited 2.jpg" id="bilde">
+<div class="txt">West ham </div>
+</div>
+<div class="instant-foto">
+    <img src="Jarrod Bowen_edited 2.jpg" id="bilde">
+    <div class="txt">The Incredibles </div>
+    </div>
+<p id="add"></p>
+
+</body>
+<style>
+    body{
+        align-items: center;
+        text-align: center;
+    }
+    .txt{
+        position: relative;
+    }
+    img{
+        width:100%;
+    }
+    .instant-foto{
+        width: 780px;
+        height: 420px;
+        position: relative;
+        border: 20px solid white;
+        border-bottom: 120px solid white;
+        box-shadow: 0px 0px 20px black;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+    }
+
+    body{
+        background-color: aqua;
+    }
+</style>
+</html>
