@@ -1,0 +1,489 @@
+<html> 
+    <head>
+        <meta charset="utf8 " />
+        <title>Pluss</title> 
+        <script>
+            window.onload = oppdater ;
+            //Timer for når siden skal oppdatere seg/ med andre ord sjekke om det er en ballong i toppen av skjermen.
+            var timer=4000
+            //Starte nedtelling for spillet
+            var startNed=['3','2','1',"Start",""]
+            var k=0
+            var liv=3
+            var poeng = 0
+            var rangering=''
+            var x=4
+            var tilfeldig1=10
+            //Trekker 4 tilfeldige tall mellom 0-10
+            var m= Math.floor(Math.random()*tilfeldig1)
+            var n= Math.floor(Math.random()*tilfeldig1)
+            var o= Math.floor(Math.random()*tilfeldig1)
+            var p= Math.floor(Math.random()*tilfeldig1)
+            var HighScore = [0]
+            var lyd=0;
+    function oppdater(){
+        var BRett=document.getElementById('BRett')
+        var Pop=document.getElementById('Pop')
+        document.getElementById("BRett").volume=0
+        document.getElementById("Pop").volume=0
+        document.getElementById("btnHjem").onclick = Hjem
+        document.getElementById("btnStart").onclick = StartTimer
+        document.getElementById("liv").innerHTML = "Liv:" + liv
+        document.getElementById("poeng").innerHTML = "Poeng:" + poeng
+        var audio=document.getElementById("audio")
+        audio.loop=true
+        document.getElementById("mute").onclick=btnBytt
+        //Funksjon for lyd skru av eller på. Må starte som mute siden chrome ikke støtter å spille av lyd rett etter siden er åpnet.
+    function btnBytt(){
+        document.getElementById("audio").play()
+        if(lyd%2==0){
+            audio.volume=1
+            BRett.volume=1
+            Pop.volume=1
+            document.getElementById("Volume").src="LydPå.svg"
+        }
+        else{
+            audio.volume=0
+            BRett.volume=0
+            Pop.volume=0
+            document.getElementById("Volume").src="LydAv.svg"
+        }
+        lyd++
+    }
+    }
+    //Dra tilbake til startsiden
+    function Hjem(){
+        location.href="ballongspill test.html"
+    }
+    //Starter nedtellingen 3-2-1-...
+    function StartTimer(){
+    document.getElementById("btnStart").style.display="none"
+    document.getElementById("skriv").value=''
+    window.setTimeout(nedtelling,0);
+    window.setTimeout(nedtelling,1000);
+    window.setTimeout(nedtelling,2000);
+    window.setTimeout(nedtelling,3000);
+    window.setTimeout(nedtelling,4000);
+    window.setTimeout(start,3000);
+}
+//selve nedtellingen som hetner fra array
+function nedtelling(){
+document.getElementById("Tall").innerHTML=startNed[k]
+k++
+}
+//Starter animasjonen på boksene
+    function start() {
+        boks.style.animation="move " + x + "s forwards linear";
+        boks2.style.animation="move " + x + "s forwards linear";
+        var input = document.getElementById('skriv')
+        var box=document.getElementById('boks')
+        window.setTimeout(death,timer)
+        //Ser om ballongene har nådd toppen av diven og livet er mer enn 1. 
+        function death(){
+            if(box.offsetTop==10&& liv>1){ 
+                liv--
+                box.style.top=''
+                box.style.display='none'
+                document.getElementById("Pop").currentTime=0
+                document.getElementById("Pop").play()
+                document.getElementById("liv").innerHTML = "Liv:" + liv
+                m= Math.floor(Math.random()*tilfeldig1)
+                n= Math.floor(Math.random()*tilfeldig1)
+                window.setTimeout(oppdater1,0)
+            }
+            if(boks2.offsetTop==10&& liv>1){
+                liv--
+                boks2.style.top=''
+                boks2.style.display='none'
+                document.getElementById("Pop").currentTime=0
+                document.getElementById("Pop").play()
+                document.getElementById("liv").innerHTML = "Liv:" + liv
+                o= Math.floor(Math.random()*tilfeldig1)
+                p= Math.floor(Math.random()*tilfeldig1)
+                window.setTimeout(oppdater1,0)
+            }
+            //Hvis ballongene når toppen og man bare har 1 liv vil det stoppe spille og gi deg stats.
+            else if(liv==1 &&box.offsetTop==10 || liv==1 &&boks2.offsetTop==10){
+                document.getElementById("resultat").style.display="block"
+                rangering=""
+                //Spiller av lyd hver gang en ballong blir poppet eller når toppen.
+                document.getElementById("Pop").currentTime=0
+                document.getElementById("Pop").play()
+                //Rangerings poeng etter hvor bra man har gjort det. 
+                if(Number(poeng)==0){
+                    rangering= "Iron"
+                }
+                 if(0<Number(poeng) && Number(poeng)<=50){
+                   rangering= "Bronze"
+                }
+                 if(50<Number(poeng) && Number(poeng)<=100){
+                    rangering= "Silver"
+                }
+                 if(100<Number(poeng) && Number(poeng)<=150){
+                    rangering= "Gold"
+                }
+                 if(150<Number(poeng) && Number(poeng)<=200){
+                    rangering="Platinum"
+                }
+                 if(200<Number(poeng) && Number(poeng)<=250){
+                    rangering="Diamond"
+                }
+                 if(250<Number(poeng) && Number(poeng)<=300){
+                    rangering="Masters"
+                }
+                 if(300<Number(poeng) && Number(poeng)<=350){
+                    rangering="Grand Master"
+                }
+                else if(Number(poeng)>350){
+                    rangering="Challenger"
+                }
+                if(poeng>HighScore[0]){
+                HighScore.unshift(poeng)}
+                else{}
+                document.getElementById("resultat").innerHTML = "Game Over" + "<br>" + "Din poengsum: " + poeng + "<br>" + "Din høyeste poengsum:" + HighScore[0] + "<br>" + "Din rangering:" + rangering
+                document.getElementById("skriv").disabled = true;
+                document.getElementById("btnRestart").style.display="block";
+                document.getElementById("btnRestart").onclick = Restart
+        }
+    }   
+        //setter inn verdiene i boksene og gjør at de vises.
+        box.style.top='150px'
+        box.style.display='block'
+        boks2.style.top='150px'
+        boks2.style.display='block' 
+        document.getElementById('textBox1').innerHTML=m + '+' + n
+        document.getElementById('textBox2').innerHTML=o + '+' + p
+        input.addEventListener('keydown', te)
+        //Funksjon for å bruke enter til å utføre regnestykkene
+        function te(e){
+
+            if(e.keyCode==13 && this.value==Number(m)+Number(n) && poeng<50){
+                box.style.top=''  
+                box.style.display='none'
+                poeng+=10
+                document.getElementById("BRett").currentTime=0
+                document.getElementById("BRett").play()
+                document.getElementById("poeng").innerHTML = "Poeng:" + poeng
+                m= Math.floor(Math.random()*tilfeldig1)
+                n= Math.floor(Math.random()*tilfeldig1)
+                window.setTimeout(oppdater1,0)
+            }
+
+            if(e.keyCode==13 &&this.value==Number(o)+Number(p) && poeng<50){
+                boks2.style.top=''
+                boks2.style.display='none'
+                poeng+=10
+                document.getElementById("BRett").currentTime=0
+                document.getElementById("BRett").play()
+                document.getElementById("poeng").innerHTML = "Poeng:" + poeng
+                o= Math.floor(Math.random()*tilfeldig1)
+                p= Math.floor(Math.random()*tilfeldig1)
+                window.setTimeout(oppdater1,0)
+            }
+            if(e.keyCode==13 && this.value==Number(m)+Number(n) && 50<=poeng){
+                boks.style.top=''
+                boks.style.display='none'
+                poeng+=10
+                //For at lydklippet skal spilles av så fort som mulig reseter man bare tiden slik at det ikke blir delay hvis man popper flere ballonger om gangen. 
+                document.getElementById("BRett").currentTime=0
+                document.getElementById("BRett").play()
+                document.getElementById("poeng").innerHTML = "Poeng:" + poeng
+                if(x>2){
+                x-=0.1
+                timer-=100
+                }
+                tilfeldig1=12
+                m= Math.floor(Math.random()*tilfeldig1)
+                n= Math.floor(Math.random()*tilfeldig1)
+                window.setTimeout(oppdater1,0)
+            }
+            if(e.keyCode==13 && this.value==Number(o)+Number(p) && poeng>=50){
+                boks2.style.top=''
+                boks2.style.display='none'
+                poeng+=10
+                document.getElementById("BRett").currentTime=0
+                document.getElementById("BRett").play()
+                document.getElementById("poeng").innerHTML = "Poeng:" + poeng
+                if(x>2){
+                x-=0.1
+                timer-=100
+                }
+                tilfeldig1=12
+                o= Math.floor(Math.random()*tilfeldig1)
+                p= Math.floor(Math.random()*tilfeldig1)
+                window.setTimeout(oppdater1,0)
+            }
+            //Resette input feltet slik at hvis man har feil må man ikke viske ut. 
+            else if(e.keyCode==13 && (this.value!=Number(m)+Number(n) || this.value!=Number(o)+Number(p))){
+                this.value='' 
+            }
+            if(e.keyCode==13){
+            this.value='' 
+            }
+        }
+        //GJør at programmet kjører på nytt for hver ballong som blir poppet eller når toppen.
+        function oppdater1(){
+        input.removeEventListener('keydown',te)
+        window.setTimeout(start,100)
+
+    }
+    //For å starte spillet på nytt uten å måtte oppdatere hele nettsiden. 
+    function Restart(){
+        document.getElementById("btnRestart").style.display="none"
+        document.getElementById("resultat").style.display="none"
+        box.style.top=''
+        box.style.display='none'
+        boks2.style.top=''
+        boks2.style.display='none'
+        document.getElementById("btnStart").style.display="block"
+        liv=3
+        tilfeldig1=10
+        x=4
+        k=0
+        timer=4000
+        poeng=0
+        rangering=""
+        document.getElementById("skriv").disabled = false;
+        document.getElementById("poeng").innerHTML = "Poeng:" + poeng
+        document.getElementById("liv").innerHTML = "Liv:" + liv
+        document.getElementById("skriv").value=''
+        
+    }
+    }
+    </script>
+    <style>
+        body{
+            background-color: rgb(134, 150, 138);
+        }
+        div1{
+            margin: auto;
+            height: 500px;
+            width: 1000px;
+            display:grid;
+            font-family: 'Balsamiq Sans', cursive;
+            border: black solid 3px;
+            /*Takk til Marcus som hjalp med  å lage bakgrunnsbildene til flere av sidene*/
+            background-image: url("Ballonger.svg");
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat; 
+            position: absolute;
+            left: 180px;
+        }
+        .box{
+            background-image: url("rød\ ballong.png");
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin: auto;
+            padding: 20px;
+            position: absolute;
+            width: 300px;
+            height: 220px;
+            top: 465px;
+            left: 480px;
+            font-size: 30px;
+            display: none;
+        }
+        #boks2{  
+            background-image: url("rød\ ballong.png");
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin: auto;
+            padding: 20px;
+            position: absolute;
+            top: 465px;
+            left: 180px;
+            width: 300px;
+            height: 220px;
+            font-size: 30px;
+            display: none;
+            }
+            /* Animasjonen*/
+        @keyframes move {
+            0%{top: 465px;}
+            100%{top: 10px; }
+        }
+        .input{
+            position: absolute;
+            top: 500px;
+        }
+        #btnStart{
+            width: 80px;
+            height: 25px;
+            position: relative;
+            border: 2px solid black;
+            text-align: center;
+            padding: 10px 0;
+            background-color: white;
+            top:200px;
+            left: 450px;
+        }
+        #Tall{
+            width: 30px;
+            height: 80px;
+            position: relative;
+            padding: 10px 0;
+            text-align: center;
+            top:180px;
+            left: 450px;
+            font-size: 100px;
+        }
+        #skriv{
+            position: absolute;
+            top:515px;
+            left: 280px;
+            font-size: large;
+            font-weight: 500;
+            border: 3px solid black;
+        }
+        #LitenFirkant{
+            margin: auto;
+            position: absolute;
+            top:510px;
+            left: 180px;
+            font-size: large;
+            font-weight: 500;
+            height: 40px;   
+            width: 1000px;
+            background-color: rgb(131, 122, 122);
+            border: 3px solid black;
+        }
+        #liv{
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            top: 25px;
+            left: 850px;
+            text-align: center;
+            font-size:30px;
+            font-weight: 1000;
+        }
+        #poeng{
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            top: 25px;
+            left: 34px;
+            text-align: center;
+            font-size:30px;
+            font-weight: 1000; 
+        }
+        #resultat{
+            width: 600px;
+            height: 400px;
+            background-color:rgb(220, 127, 20);
+            position: absolute;
+            top:60px;
+            left:200px;
+            border: 3px solid black;
+            display: none;
+            text-align: center;
+            font-size: 40px;
+        }
+        #btnRestart{
+            width: 80px;
+            height: 45px;
+            position: absolute;
+            border: 2px solid black;
+            text-align: center;
+            padding: 10px 0;
+            background-color: white;
+            top:290px;
+            left: 450px;
+            display: none;
+        }
+        #btnHjem{
+            width: 150px;
+            height: 200px;
+            position: absolute;
+            text-align: center;
+            padding: 10px 0;
+            background-image: url("Ballong logo.svg");
+            font-size: 35px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        #btnHjem:hover{
+            cursor: pointer;
+        }
+        #btnRestart:hover{
+            cursor: pointer;
+        }
+        #btnStart:hover{
+            cursor: pointer;
+        }
+        .tekstBoks1{
+            position: relative;
+            top: 15px;
+            left: 155px ;
+        }
+        .tekstBoks2{
+            position: relative;
+            top: 15px;
+            left: 155px ;
+        }
+        #block{
+            margin: auto;
+            position: absolute;
+            top:556px;
+            left: 180px;
+            font-size: large;
+            font-weight: 500;
+            height:68px;   
+            width: 1000px;
+            background-color: rgb(134, 150, 138);
+        }
+        /*
+        Lyd
+        */
+        .demp{
+            position:fixed;
+            top: 510px;
+            left: 1220px;
+            width: 20px;
+            height: 20px;
+            border: grey solid 2px;
+            background-color: white;
+            cursor: pointer;
+            transition: 200ms;
+            }
+        .demp:hover{
+            opacity: 0.9;
+            transition: 200ms;
+            }
+        .lyd{
+            position: relative;
+            left: 1px;
+            top: 1px;
+            width: 18px;
+            height: 18px;
+            }
+    </style>
+    </head>
+    <body>
+        <div id="btnHjem"></div>
+        <div1>
+            <div class="box" id="boks"><div class="tekstBoks1" id="textBox1">
+            </div></div>
+            <div id="boks2"><div class="tekstBoks2" id="textBox2"></div></div>
+            <div id=btnStart>Start</div>
+            <div id="Tall"></div>
+            <div id="liv"></div>
+            <div id="poeng"></div>
+            <div id="resultat"></div>
+            <div id="btnRestart">Start på nytt</div>
+        </div1>
+        <div id="LitenFirkant">Skriv her:</div>
+        <input id="skriv" class="input">
+        <div id="block"></div>
+        <div class="demp" id="mute" >
+            <audio autoplay src="Pluss Atest.mp3" id="audio" preload="auto" allow="autoplay"></audio>
+            <audio id="BRett" src="Ka ching.mp3" preload="auto"></audio>
+            <audio id="Pop" src="balloon-pop.wav" preload="auto"></audio>
+            <img src="LydAv.svg" id="Volume" class="lyd">
+        </div>
+        <div id="Pause"></div>
+    </body>
+</html>

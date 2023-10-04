@@ -1,0 +1,201 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Up'N POP</title>
+    <script src="Pluss.html"></script>
+    </head>
+    <script>
+    window.onload = oppstart;
+    var lyd=0;
+    //Funksjon til å ta deg til de forskjellige spillene. 
+function oppstart(){
+    document.getElementById("BPR2").onclick = Plussiden
+    document.getElementById("BPG2").onclick = Minussiden
+    document.getElementById("BPB2").onclick = GangeSiden
+    var audio=document.getElementById("audio")
+        audio.loop=true
+        document.getElementById("mute").onclick=btnBytt
+}
+function btnBytt(){
+        document.getElementById("audio").play()
+        if(lyd%2==0){
+            audio.volume=1
+            document.getElementById("Volume").src="LydPå.svg"
+        }
+        else{
+            audio.volume=0
+            document.getElementById("Volume").src="LydAv.svg"
+        }
+        lyd++
+    }
+function Plussiden(){
+location.href="Test ny ballong.html"
+}
+function Minussiden(){
+    location.href="Minus.html"
+}
+function GangeSiden(){
+    location.href="Gange.html"
+}
+</script>
+<style>
+body{
+    background-image: url("bakgrunnh.svg");
+    background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat; 
+}
+h2{
+    position: absolute;
+    text-align: center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size:100px;
+    top:-75px;
+    left: 480px;
+}
+.balong{
+    position: absolute;
+    height: 400px;
+    z-index: -1;
+    top: -50px;
+    left: -110px;
+    
+}
+.pluss{
+    position: absolute;
+    top:200px;
+    left: 230px;
+    font-size: 50px;
+    z-index: 2;
+    cursor: pointer;
+    border: 1px solid black;
+    
+}
+.BPR{
+    position: absolute;
+    width: 70px;
+    height: 150px;
+    animation: move 2s forwards;
+
+}
+
+.pluss:hover .balong{
+    cursor: pointer;
+    height: 420px;
+    left: -120px;
+
+}
+.balong2{
+    position: absolute; 
+    height: 400px;
+    z-index: -1;
+    top: -50px;
+    left: -115px;
+}
+.minus{
+    position: absolute;
+    z-index: 2;
+    top: 208px;
+    left: 600px;
+    font-size: 40px;
+    cursor: pointer;
+}
+.BPG{
+    position: absolute;
+    width: 70px;
+    height: 150px;
+    animation: move 2s forwards;
+    
+}
+.minus:hover .balong2{
+    cursor: pointer;
+    height: 420px;
+    left: -120px;
+}
+.balong3{
+    position: absolute;
+    height: 400px;
+    z-index: -1;
+    top: -50px;
+    left:  -110px;
+}
+.gange{
+    position: absolute;
+    z-index: 2;
+    top: 208px;
+    left: 900px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.BPGU{
+    position: absolute;
+    width: 70px;
+    height: 150px;
+    animation: move 2s forwards;
+
+}
+.gange:hover .balong3{
+    cursor: pointer;
+    height: 420px;
+    left: -120px;
+
+}
+.blad1{
+    position: absolute;
+    top: 750px;
+    left: 400px;
+    height: 37px;
+    animation: beveg 3s forwards;
+
+}
+
+@keyframes move {
+    0%{top: 300px;}
+    100%{top:0px;}
+    /*
+    Lyd
+    */
+            } 
+
+@keyframes beveg{
+    100%{top: 0px}
+    0%{ top : 200px}
+}
+            .demp{
+            position:fixed;
+            top: 510px;
+            left: 1220px;
+            width: 20px;
+            height: 20px;
+            border: grey solid 2px;
+            background-color: white;
+            cursor: pointer;
+            transition: 200ms;
+            }
+        .demp:hover{
+            opacity: 0.9;
+            transition: 200ms;
+            }
+        .lyd{
+            position: relative;
+            left: 1px;
+            top: 1px;
+            width: 18px;
+            height: 18px;
+            }
+
+</style>
+
+<body>
+<div class="BPR" id="BPR2"><div class="pluss" id="pluss">pluss<img src="rød ballong2.svg" class="balong"></div></div>
+<div class="BPG" id="BPG2"><div class="minus" id="minus">minus<img src="grønn ballong.png" class="balong2"></div></div>
+<div class="BPGU" id="BPB2"><div class="gange" id="gange">Gange<img src="gul ballong.png" class="balong3"></div></div>
+    
+
+    <h2>Up'N POP</h2>
+    <div class="demp" id="mute" >
+        <audio autoplay src="MacMConTestA.mp3" id="audio" preload="auto" allow="autoplay"></audio>
+        <img src="LydAv.svg" id="Volume" class="lyd">
+    </div>
+</body>
