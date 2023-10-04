@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index.html</title>
+</head>
+<script>
+    window.onload = oppstart
+    function oppstart(){
+        document.getElementById("btnProsess").onclick = Prosess
+        document.getElementById("btnProdukt").onclick = Produkt
+        setEnlargeImage("storbilde2")
+        setEnlargeImage("storbilde3")
+        setEnlargeImage("bildenr1")
+    }
+    function setEnlargeImage(image){
+        var bilde01 = document.getElementById("StorBilde");
+        var imgpop = document.getElementById("img01")
+        var captionText = document.getElementById("caption")
+        var img = document.getElementById(image)
+        img.onclick = function (){            
+            bilde01.style.display = "block";
+            imgpop.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+        var span = document.getElementsByClassName("lukk")[0];
+        span.onclick = function(){
+            bilde01.style.display = "none"
+        }
+    }
+
+    function Prosess(){
+        var Hoved = document.getElementById("HovedSide");
+        var Pros = document.getElementById("Side2");
+        Hoved.style.display="none"
+        Pros.style.display="grid"
+        document.getElementById("Hode").style.width ="60vw"
+        document.getElementById("Hals").style.width ="60vw"
+    }
+    function Produkt(){
+        var Pros = document.getElementById("Side2");
+        var Hoved = document.getElementById("HovedSide");
+        Pros.style.display="none"
+        Hoved.style.display="grid"
+        document.getElementById("Hode").style.width ="90vw"
+        document.getElementById("Hals").style.width ="90vw"
+    }  
+</script>
+<body>
+    <div class="mid">
+    <head>
+    <div class="header" id="Hode"><h1>UTF-8 og ANSI</h1></div>
+    </head>
+    </div>
+    <div class="mid">
+    <nav class="togrp" id="Hals"><div class="prod" id="btnProdukt"><scan>Produkt</scan></div><div class="prod" id="btnProsess"><scan>Prosess</scan></div></nav>
+    </div>
+    <main class="mid">
+        <div class="storbilde1" id="StorBilde">
+            <span class="lukk">&times;</span>
+            <img src="utf-8.png" id="img01" class="img01-content">
+            <div id="caption"></div>
+            </div>
+        <div class="hovedside" id="HovedSide">
+            <div class="topskrift"><div class="topogbot"><div class="top"><h2>UTF-8 og ANSI</h2></div><div class="bot"><p>Tegnsettet i en datamaskin avgjør hvordan bokstavene i alfabetet, tall og andre skrifttegn skal vises på skjermen. Som for bilder gjelder det å bryte ned ting til 0 og 1. Derfor har hver enkelt bokstav tall og tegn sitt binære tall. Tidligere brukte de fleste datamaskiner tegnsettet ASCII. Det brukte 7 bit og ga 128 muligheter for ulike tegn (0 til 127). Programvarehuset Windows laget etter hvert sitt eget tegnsett som de kalte ANSI. De utvidet da tegnsettet til 8 bit, slik at de blant annet fikk med bokstavene Æ, Ø, Å. I dag bruker datamaskiner tegnsettet Unicode, som har 8 bit og derfor 256 mulige tegn vi kan bruke. </p></div></div></div>
+            <div class="bilde"><img src="utf-8.png" class="img1" id="bildenr1" alt="Graf over nettsteder med forskjellige kodinger"><div class="txt"><h2>8-bit Unicode Transformation Format</h2><p>UTF-8 (8-bit Unicode Transformation Format) er en binær representasjonsform for tegn i Unicode-tegnsett, med variabel tegnlengde, oppfunnet av Ken Thompson og Rob Pike. Unicode er en nummerert samling av tegn, og UTF-8 representerer disse numrene med mellom en og fire byte, og er konstruert slik at de første 128 tegnene (U+0000 til U+007F), samsvarer nøyaktig med US-ASCII-standarden. UTF-8 er dermed bakoverkompatibelt med systemer som støtter ASCII-tekst.</p></div></div>
+            <div class="bunnskrift2"><div class="topogbot"><div class="top"><h2>UTF-8</h2></div><div class="bot"><p>Du har sikkert lagt merke til at du i begynnelsen av koden skriver <meta charset=’UTF-8’> UTF-8 står for Unicode Transformation 8-bit og er et Unicode-tegnsett som kan vise alle tegn fra alle språk. Det som kjennetegner UTF-8, er at det bruker ulike lengder på en byte, alt fra en, til fire byte. Når du skriver HTML-kode, blir UTF-8 automatisk brukt som tegnsett.  </p></div></div></div>
+            <div class="bunnskrift23"><div class="topogbot"><div class="top"><h2>ANSI</h2></div><div class="bot"><p>ANSI er en ikke-statlig organisasjon i USA som koordinerer utviklingen av nasjonale og internasjonale standarder innenfor en rekke fagområder.
+                Organisasjonen ble stiftet i 1918 under navnet American Engineering Standards Committee (AESC), som i 1928 ble endret til American Standards Association (ASA).</p></div></div></div>
+        </div>
+        <div class="side2" id="Side2">
+            <div class="info"><h2>Framgangsmåte:</h2><li>Hentet informasjon om UTF-8 og ANSI</li><li>Laget en Wireframe til hver av sidene</li><li>Brukte grid og flex til å lage "skjelettet" til sidene</li><li>La på detaljer som farge, skrifttype, skriftstørrelse og noen funksjoner for å finjustere sidene</li></div>
+            <div class="bilde2"><img src="A4 - 1.svg" class="img3" id="storbilde2" alt="Wireframe nr 1"><img src="A4 - 2.svg" class="img3" id="storbilde3" alt="Wireframe nr 2"></div>
+            <div class="avslutt"><h2>Kilder:</h2><li><a href="https://no.wikipedia.org/wiki/UTF-8">Informasjon om UTF-8</a></li><li><a href="https://www.ansi.org/about/introduction">Informasjon om ANSI</a></li><li><a href="https://www.figma.com/ui-design-tool/">Hvor jeg laget Wireframe</a></li><li><a href="https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_img">Funksjonen til zoomen på bildene</a></li><li>Eirik Vågeskar m/f (2021) Kode 1: Informasjonsteknologi vg2/vg3 Cappelen Damm</li></div>
+        </div>
+    </main>
+
+
+</body>
+<style>
+.img01-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+    #caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 2rem;
+  padding: 10px 0;
+  height: 150px;
+}
+.img01-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+.lukk {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #000000;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.lukk:hover,
+.lukk:focus {
+  color: rgb(92, 91, 91);
+  text-decoration: none;
+  cursor: pointer;
+}
+@media only screen and (max-width: 700px){
+  .img01-content{
+    width: 100%;
+  }
+}
+.storbilde1{
+       display: none;
+       position: fixed;
+       z-index: 1; 
+       padding-top: 100px; 
+       left: 0;
+       top: 0;
+       width: 100%; 
+       height: 100%; 
+       overflow: auto;
+       background-color: rgb(255, 255, 255); 
+       background-color: rgba(255, 255, 255, 0.9);
+    }
+    .img3{
+        display: flex;
+        object-fit: contain;
+        flex: 1;
+        height: 30rem;
+    }
+    li{
+        font-size: 1.2rem;
+    }
+    .img2{
+        background-image: cover;
+        display: flex;
+    }
+    .info{
+        display: flex;
+        grid-row: span 1;
+        flex-direction: column;
+        padding-left: 2rem;
+    }
+    .bilde2{
+        display: flex;
+        grid-row: span 2;
+        justify-content: center;
+    }
+    .avslutt{
+        display: flex;
+        grid-row: span 1;
+        flex-direction: column;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .side2{
+        display: none;
+        width: 60vw;
+        border: solid black 1px;
+        background-color: rgb(248, 248, 248);
+        grid-template-rows: repeat(4,1fr);
+    }
+    body{
+        background-color: rgb(207, 207, 207);
+    }
+    .txt{
+        display: flex;
+        flex-direction: column;
+        flex:1;
+        padding: 1rem;
+    }
+    .prod:hover{
+        background-color: #94ccfa;
+            cursor: pointer;
+            transition: 0.5s;
+    }
+    p{
+        font-size: 1.2rem;
+    }
+    .topogbot{
+        grid-template-rows: repeat(4,1fr);
+    }
+    .top{
+        display: flex;
+        grid-row: span 1;
+    }
+    .bot{
+        display: flex;
+        grid-row: span 3;
+    }
+    .hovedside{
+        width: 90vw;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(4,1fr);
+        border: black 1px solid;
+        background-color: rgb(248, 248, 248);
+    }
+    .topskrift{
+        display: flex;
+        grid-column: span 2;
+        grid-row: span 1;
+        padding-left: 3rem;
+        padding-right: 3rem;
+        padding-top: 0.3rem;
+    }
+    .bilde{
+        display: flex;
+        grid-column: span 2;
+        grid-row: span 2;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .img1{
+        background-image: cover;
+        display: flex;
+        flex:1;
+        width: 1vw;
+    }
+    .bunnskrift2{
+        display: flex;
+        grid-column: span 1;
+        grid-row: span 1;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .bunnskrift23{
+        display: flex;
+        grid-column: span 1;
+        grid-row: span 1;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .header{
+        display: flex;
+        align-items: center;
+        background-color:#7a7ad3;
+        justify-content: center;
+        width: 90vw;
+        border: solid black 1px;
+    }
+    .togrp{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        width: 90vw;
+        border-right: solid black 2px;
+
+    }
+    .prod{
+        display: flex;
+        grid-column: span 1;
+        justify-content: center;
+        background-color: #8d8de4;
+        border-left: solid black 2px;
+    }
+    scan{
+        font-size: 2rem;
+    }
+    h1{
+        font-size: 2,5rem;
+    }
+    .mid{
+        display: flex;
+        justify-content: center;
+    }
+</style>
+</html>
