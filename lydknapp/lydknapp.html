@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    window.onload = oppstart
+    var lyd=0
+    function oppstart(){
+        var audio=document.getElementById("audio")
+        document.getElementById("mute").onclick = btnBytt
+        function btnBytt(){
+        document.getElementById("audio").play()
+        if(lyd%2==0){
+            audio.volume=1
+            document.getElementById("Volume").src="LydPå.svg"
+        }
+        else{
+            audio.volume=0
+            document.getElementById("Volume").src="LydAv.svg"
+        }
+        lyd++
+    }
+    }
+
+</script>
+<body>
+    <div class="demp" id="mute" >
+        <audio autoplay src="JCole_For_Whom_The_Bell_Tolls_Offi_(getmp3.pro).mp3" id="audio" preload="auto" allow="autoplay"></audio>
+        <img src="LydAv.svg" id="Volume" class="lyd">
+    </div>
+</body>
+<style>
+    .demp{
+            position:fixed;
+            top: 80vh;
+            left: 90vw;
+            width: 20px;
+            height: 20px;
+            border: grey solid 2px;
+            background-color: white;
+            cursor: pointer;
+            transition: 200ms;
+            }
+        .demp:hover{
+            opacity: 0.9;
+            transition: 200ms;
+            }
+        .lyd{
+            position: relative;
+            left: 1px;
+            top: 1px;
+            width: 18px;
+            height: 18px;
+            }
+</style>
+</html>
